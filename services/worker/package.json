@@ -1,0 +1,52 @@
+{
+  "name": "@citypulse/worker",
+  "version": "1.0.0",
+  "description": "CityPulse Worker Service - Background job processing for incident analysis and resource matching",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src --ext .js --fix",
+    "clean": "rm -rf node_modules dist coverage"
+  },
+  "dependencies": {
+    "bull": "^4.12.2",
+    "redis": "^4.6.11",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^4.7.1",
+    "dotenv": "^16.3.1",
+    "@prisma/client": "^5.7.1",
+    "mongodb": "^6.3.0",
+    "axios": "^1.6.2",
+    "natural": "^6.8.0",
+    "compromise": "^14.10.2",
+    "geolib": "^3.3.4",
+    "moment": "^2.29.4",
+    "nodemailer": "^6.9.7",
+    "twilio": "^4.19.0",
+    "sharp": "^0.33.1",
+    "lodash": "^4.17.21",
+    "uuid": "^9.0.1",
+    "cron": "^3.1.6",
+    "@citypulse/common": "workspace:*"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "jest": "^29.7.0",
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "worker",
+    "background-jobs",
+    "incident-processing",
+    "resource-matching",
+    "ml-classification"
+  ]
+}

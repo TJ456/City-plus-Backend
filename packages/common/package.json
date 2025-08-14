@@ -1,0 +1,36 @@
+{
+  "name": "@citypulse/common",
+  "version": "1.0.0",
+  "description": "CityPulse Common Package - Shared utilities, types, and event definitions across all services",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src --ext .js --fix",
+    "clean": "rm -rf node_modules dist coverage"
+  },
+  "dependencies": {
+    "winston": "^3.11.0",
+    "joi": "^17.11.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "uuid": "^9.0.1",
+    "events": "^3.3.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "shared",
+    "utilities",
+    "events",
+    "common",
+    "types"
+  ]
+}

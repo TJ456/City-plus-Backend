@@ -1,0 +1,63 @@
+{
+  "name": "citypulse-backend",
+  "version": "1.0.0",
+  "description": "CityPulse - Real-time community incident reporting & resource routing backend system",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "services/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:worker\" \"npm run dev:auth\"",
+    "dev:api": "npm run dev --workspace=services/api",
+    "dev:worker": "npm run dev --workspace=services/worker",
+    "dev:auth": "npm run dev --workspace=services/auth",
+    "start": "concurrently \"npm run start:api\" \"npm run start:worker\" \"npm run start:auth\"",
+    "start:api": "npm run start --workspace=services/api",
+    "start:worker": "npm run start --workspace=services/worker",
+    "start:auth": "npm run start --workspace=services/auth",
+    "install:all": "npm install && npm run install:workspaces",
+    "install:workspaces": "npm install --workspaces",
+    "clean": "npm run clean --workspaces",
+    "lint": "eslint . --ext .js --fix",
+    "test": "npm run test --workspaces",
+    "db:generate": "npm run db:generate --workspace=services/api",
+    "db:push": "npm run db:push --workspace=services/api",
+    "db:migrate": "npm run db:migrate --workspace=services/api"
+  },
+  "keywords": [
+    "emergency-response",
+    "incident-reporting",
+    "resource-routing",
+    "community-platform",
+    "real-time",
+    "nodejs",
+    "express",
+    "mongodb",
+    "prisma"
+  ],
+  "author": "CityPulse Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^3.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/citypulse/backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/citypulse/backend/issues"
+  },
+  "homepage": "https://github.com/citypulse/backend#readme"
+}

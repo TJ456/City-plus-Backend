@@ -1,0 +1,101 @@
+// 🗄️ PRISMA SCHEMA - Database Models & Relationships for CityPulse
+//
+// Purpose: Defines the complete data model for incident reporting and resource routing
+// Database: MongoDB (chosen for geospatial queries and flexible document structure)
+// Architecture: Supports scalable, real-time community incident management
+
+// STEP 1: Configure Prisma client and database connection
+// TODO: Set up Prisma client generation for MongoDB
+// - Define generator for Prisma Client
+// - Configure MongoDB datasource with connection URL
+// - Set up environment variable for DATABASE_URL
+
+// STEP 2: Define User model with role-based access
+// TODO: Create User entity with authentication and role management
+// - id: Unique identifier for each user
+// - email: User email (unique, required for login)
+// - password: Hashed password for authentication
+// - name: Full name of the user
+// - role: Enum (CITIZEN, VOLUNTEER, NGO, ADMIN) for permission control
+// - phone: Contact number for emergency communication
+// - trustScore: Calculated score based on user's reporting history
+// - isVerified: Boolean flag for account verification status
+// - location: Optional location data for proximity-based features
+// - createdAt: Timestamp for user registration
+// - updatedAt: Timestamp for last profile update
+
+// STEP 3: Define Incident model for community reports
+// TODO: Create Incident entity for citizen-reported emergencies
+// - id: Unique identifier for each incident
+// - title: Brief title describing the incident
+// - description: Detailed description of what happened
+// - category: Enum (FIRE, MEDICAL, ACCIDENT, FLOOD, CRIME, OTHER)
+// - severity: Enum (LOW, MEDIUM, HIGH, CRITICAL) for priority routing
+// - status: Enum (REPORTED, VERIFIED, ASSIGNED, IN_PROGRESS, RESOLVED)
+// - location: Geographic coordinates and address
+// - reporterId: Foreign key linking to User who reported
+// - verifiedBy: Optional foreign key to User who verified incident
+// - images: Array of image URLs for visual evidence
+// - reportedAt: Timestamp when incident was reported
+// - updatedAt: Timestamp for last status update
+// - resolvedAt: Optional timestamp when incident was resolved
+
+// STEP 4: Define Resource model for volunteer/NGO assets
+// TODO: Create Resource entity for emergency response assets
+// - id: Unique identifier for each resource
+// - name: Name/identifier of the resource
+// - type: Enum (AMBULANCE, FIRE_TRUCK, POLICE_CAR, RESCUE_TEAM, SUPPLIES)
+// - description: Details about resource capabilities
+// - ownerId: Foreign key linking to User who owns the resource
+// - availability: Enum (AVAILABLE, BUSY, OFFLINE, MAINTENANCE)
+// - location: Current GPS coordinates of the resource
+// - capacity: Number indicating resource capacity (seats, supply quantity)
+// - equipment: Array of equipment/tools available with resource
+// - contactInfo: Emergency contact details for resource
+// - lastLocationUpdate: Timestamp of last GPS update
+// - createdAt: Timestamp when resource was registered
+// - updatedAt: Timestamp for last resource update
+
+// STEP 5: Define Assignment model for incident-resource matching
+// TODO: Create Assignment entity linking incidents with resources
+// - id: Unique identifier for each assignment
+// - incidentId: Foreign key linking to assigned Incident
+// - resourceId: Foreign key linking to assigned Resource
+// - status: Enum (PENDING, ACCEPTED, REJECTED, IN_PROGRESS, COMPLETED)
+// - assignedAt: Timestamp when assignment was created
+// - acceptedAt: Optional timestamp when resource accepted assignment
+// - completedAt: Optional timestamp when assignment was completed
+// - notes: Additional notes about the assignment
+// - priority: Calculated priority score for this assignment
+// - estimatedArrival: Estimated time for resource to reach incident
+// - actualArrival: Actual timestamp when resource arrived
+// - feedback: Post-assignment feedback and rating
+
+// STEP 6: Add database indexes for performance optimization
+// TODO: Create database indexes for efficient queries
+// - Geospatial index on Incident.location for proximity searches
+// - Geospatial index on Resource.location for resource finding
+// - Compound index on Incident (status, category, severity) for filtering
+// - Index on User.email for authentication queries
+// - Index on Assignment (incidentId, resourceId) for relationship queries
+// - Index on Incident.reportedAt for time-based searches
+// - Index on Resource (type, availability) for resource matching
+
+// STEP 7: Define relationship constraints and cascading rules
+// TODO: Set up foreign key relationships and data integrity
+// - User -> Incidents: One-to-many (user can report multiple incidents)
+// - User -> Resources: One-to-many (user can own multiple resources)
+// - Incident -> Assignments: One-to-many (incident can have multiple assignments)
+// - Resource -> Assignments: One-to-many (resource can have multiple assignments)
+// - User -> Assignments: Through incident and resource relationships
+// - Define cascading delete rules for data consistency
+
+// STEP 8: Add validation rules and constraints
+// TODO: Implement data validation at database level
+// - Email format validation for User.email
+// - Phone number format validation for User.phone
+// - Coordinate range validation for location fields
+// - Trust score range validation (0-100)
+// - Enum value constraints for all status fields
+// - Required field constraints for critical data
+// - Unique constraints for preventing duplicates

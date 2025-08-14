@@ -1,0 +1,106 @@
+# CityPulse Backend Services
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: citypulse-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: citypulse
+    volumes:
+      - mongodb_data:/data/db
+      - ./docker/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - citypulse-network
+
+  # Redis for job queues and caching
+  redis:
+    image: redis:7.2-alpine
+    container_name: citypulse-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - citypulse-network
+
+  # API Service
+  api:
+    build:
+      context: .
+      dockerfile: services/api/Dockerfile
+    container_name: citypulse-api
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: mongodb://admin:password@mongodb:27017/citypulse?authSource=admin
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: dev-jwt-secret
+    depends_on:
+      - mongodb
+      - redis
+    volumes:
+      - ./services/api:/app
+      - /app/node_modules
+    networks:
+      - citypulse-network
+
+  # Worker Service
+  worker:
+    build:
+      context: .
+      dockerfile: services/worker/Dockerfile
+    container_name: citypulse-worker
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: mongodb://admin:password@mongodb:27017/citypulse?authSource=admin
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - mongodb
+      - redis
+    volumes:
+      - ./services/worker:/app
+      - /app/node_modules
+    networks:
+      - citypulse-network
+
+  # Auth Service
+  auth:
+    build:
+      context: .
+      dockerfile: services/auth/Dockerfile
+    container_name: citypulse-auth
+    restart: unless-stopped
+    ports:
+      - "3002:3002"
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: mongodb://admin:password@mongodb:27017/citypulse?authSource=admin
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: dev-jwt-secret
+    depends_on:
+      - mongodb
+      - redis
+    volumes:
+      - ./services/auth:/app
+      - /app/node_modules
+    networks:
+      - citypulse-network
+
+volumes:
+  mongodb_data:
+  redis_data:
+
+networks:
+  citypulse-network:
+    driver: bridge

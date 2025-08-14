@@ -1,0 +1,61 @@
+{
+  "name": "@citypulse/auth",
+  "version": "1.0.0",
+  "description": "CityPulse Authentication Service - Dedicated microservice for user authentication and authorization",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src --ext .js --fix",
+    "clean": "rm -rf node_modules dist coverage"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "compression": "^1.7.4",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.1",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-facebook": "^3.0.0",
+    "passport-jwt": "^4.0.1",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^4.7.1",
+    "dotenv": "^16.3.1",
+    "@prisma/client": "^5.7.1",
+    "mongodb": "^6.3.0",
+    "redis": "^4.6.11",
+    "nodemailer": "^6.9.7",
+    "twilio": "^4.19.0",
+    "speakeasy": "^2.0.0",
+    "qrcode": "^1.5.3",
+    "joi": "^17.11.0",
+    "moment": "^2.29.4",
+    "uuid": "^9.0.1",
+    "@citypulse/common": "workspace:*"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3",
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "authentication",
+    "authorization",
+    "jwt",
+    "oauth",
+    "microservice",
+    "security"
+  ]
+}
