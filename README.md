@@ -190,26 +190,14 @@ We welcome contributions from developers, emergency responders, and community or
 
 ---
 
-## 🔗 **Links & Resources**
+<!-- ## 🔗 **Links & Resources**
 
 - 🌐 **[Live Demo](https://citypulse-demo.herokuapp.com)** - Try the platform
 - 📱 **[Mobile App](https://github.com/TJ456/citypulse-mobile)** - React Native client
 - 🖥️ **[Web Dashboard](https://github.com/TJ456/citypulse-web)** - Admin interface
 - 📊 **[Analytics Dashboard](https://citypulse-analytics.herokuapp.com)** - Impact metrics
-- 💬 **[Community Discord](https://discord.gg/citypulse)** - Join our community
+- 💬 **[Community Discord](https://discord.gg/citypulse)** - Join our community -->
 
----
-
-## 👨‍💻 **About the Developer**
-
-**Tanmay Joddar** - Full Stack Developer passionate about using technology to solve real-world problems and build stronger communities.
-
-- 🐙 **GitHub**: [@TJ456](https://github.com/TJ456)
-- 💼 **LinkedIn**: [Connect with me](https://linkedin.com/in/tanmay-joddar)
-- 📧 **Email**: [tanmay.joddar@example.com](mailto:tanmay.joddar@example.com)
-- 🐦 **Twitter**: [@TanmayJoddar](https://twitter.com/TanmayJoddar)
-
----
 
 ## 📜 **License**
 
